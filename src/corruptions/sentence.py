@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../src")
+sys.path.insert(0,'..')
 
 from corruptions.word import word_corrupt
 from corruptions.character import character_corrupt

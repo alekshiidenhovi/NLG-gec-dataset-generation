@@ -1,3 +1,6 @@
+# Main
+include_articles = 10
+
 # Sentence corrupt
 sentence_percentage = 0.7
 
@@ -11,7 +14,7 @@ random_tokens = ["a", "an", "the", "on", "in", "out", "at", "to", "from",
 
 # Character corrupt
 alphabets = list(set("abcdefghijklmnopqrstuvwxyz"))
-punctuations = {
+punctuations = { # The distribution of punctuation corruptions
   0.05: "",
   0.10: ":",
   0.15: ";",
@@ -20,3 +23,4 @@ punctuations = {
   0.70: ",", 
   1: "."
 }
+punct_percentage = 1 # How often punctuation gets corrupted

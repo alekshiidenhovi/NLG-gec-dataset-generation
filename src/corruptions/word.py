@@ -1,6 +1,7 @@
-import random
 import sys
-sys.path.append("../src")
+sys.path.insert(0,'..')
+
+import random
 from settings import masking, deletion, insertion, seq_threshold, random_tokens
 
 def word_corrupt(word: str, seq_length: int) -> str:

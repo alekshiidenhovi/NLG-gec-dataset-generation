@@ -1,11 +1,12 @@
-import random
 import sys
-sys.path.append("../src")
-from settings import alphabets, punctuations
+sys.path.insert(0,'..')
+
+import random
+from settings import alphabets, punctuations, punct_percentage
 
 # Corrupt punctuation of the word
-def punctuation_corruption(character: str, keep: float) -> str:
-    if random.uniform(0, 1) <= keep:
+def punctuation_corruption(character: str, corrupt_punct: float) -> str:
+    if random.uniform(0, 1) > corrupt_punct:
         return character
     else:
         punctuation_percentage: float = random.uniform(0, 1)
@@ -22,9 +23,9 @@ def character_corrupt(word: str) -> str:
     
     for i, character in enumerate(word):
         #print(i, character)
-        if i == len(word) - 2 and character in punctuations.values():
+        if i == len(word) - 1 and character in punctuations.values():
             #print("Punctuation modified")
-            corrupted_word += punctuation_corruption(character, 0.6)
+            corrupted_word += punctuation_corruption(character, punct_percentage)
         elif random.uniform(0, 1) < character_percentage:
             idx: int = random.randint(0, len(alphabets) - 1)
             corrupted_word += alphabets[idx]
