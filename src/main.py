@@ -29,8 +29,11 @@ def main():
         text = text.split("\n\nReferences")[0] # Remove reference section
         
         # Find all the individual chapters
-        regex = r'\s?([^\n]+)'
+        # regex = r'\s?([^\n]+)' # First version
+        regex = r'([A-Z][^\n\.!?]*[\.!?])\s+'
         sequences = re.findall(regex, text) 
+        sequences = list(filter(lambda seq: re.findall(r"\s[A-Za-z]{1,2}\.", seq) == [], sequences)) # Filter sentences that have been corrupted from words like Dr, Mr. etc
+        sequences = list(filter(lambda seq: len(list(seq)) >= 10, sequences)) # Filter sequences that are less than 10 characters long
         
         for orig_seq in sequences:
             if len(orig_seq.split()) < MAX_SEQ_LENGTH:
