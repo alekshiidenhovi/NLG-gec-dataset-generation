@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0,'..')
 
 import random
-from settings import alphabets, punctuations, punct_percentage
+from settings import character_percentage, cum_char_distribution, punctuations, punct_percentage
 
 # Corrupt punctuation of the word
 def punctuation_corruption(character: str, corrupt_punct: float) -> str:
@@ -16,8 +16,16 @@ def punctuation_corruption(character: str, corrupt_punct: float) -> str:
         
         raise Exception("Error in the loop")
 
+# Returns character based on the character distribution
+def choose_character(chance: float) -> str:
+    for cum_fraction, char in cum_char_distribution.items():
+        if chance <= cum_fraction:
+            return char
+    
+    return Exception("Error in the loop")
+
+# Performs character level corruptions
 def character_corrupt(word: str) -> str:
-    character_percentage: float = 0.005
     corrupted_word: str = ""
     #print(word)
     
@@ -27,8 +35,8 @@ def character_corrupt(word: str) -> str:
             #print("Punctuation modified")
             corrupted_word += punctuation_corruption(character, punct_percentage)
         elif random.uniform(0, 1) < character_percentage:
-            idx: int = random.randint(0, len(alphabets) - 1)
-            corrupted_word += alphabets[idx]
+            chance: float = random.uniform(0, 1)
+            corrupted_word += choose_character(chance)
         else: 
             corrupted_word += character
     
