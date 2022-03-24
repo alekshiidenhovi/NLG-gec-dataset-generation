@@ -1,8 +1,22 @@
+import os
 import sys
-sys.path.insert(0,'..')
+import inspect
+
+from numpy import choose
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir) 
 
 import random
-from settings import masking, deletion, insertion, seq_threshold, random_tokens
+from settings import masking, deletion, insertion, seq_threshold, cum_word_distribution
+
+def choose_word(chance: float) -> str:
+    for cum_fraction, word in cum_word_distribution.items():
+        if chance <= cum_fraction:
+            return word
+    
+    return Exception("Error in the loop")
 
 def word_corrupt(word: str, seq_length: int) -> str:
     percentage: float = random.uniform(0, 1)
@@ -17,8 +31,8 @@ def word_corrupt(word: str, seq_length: int) -> str:
     elif percentage < deletion: # delete the word
         return ""
     elif percentage < insertion: # insert a random token
-        idx = random.randint(0, len(random_tokens) - 1)
-        return f"{word} {random_tokens[idx]} "
+        chance = random.uniform(0, 1)
+        return f"{word} {choose_word(chance)} "
     else:
         return word + " "
     

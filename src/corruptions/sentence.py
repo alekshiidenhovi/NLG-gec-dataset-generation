@@ -1,5 +1,18 @@
+# import sys
+# sys.path.insert(0,'..')
+
+# from corruptions.word import word_corrupt
+# from corruptions.character import character_corrupt
+# from typing import List
+# import random
+
+import os
 import sys
-sys.path.insert(0,'..')
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir) 
 
 from corruptions.word import word_corrupt
 from corruptions.character import character_corrupt
