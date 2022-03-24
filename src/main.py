@@ -6,7 +6,7 @@ from datasets import load_dataset
 from datetime import datetime, date
 
 from corruptions.sentence import sentence_corrupt
-from settings import sentence_percentage, include_articles
+from settings import sentence_percentage, include_articles, MAX_SEQ_LENGTH
 
 
 # Change the current working directory to src
@@ -33,13 +33,14 @@ def main():
         sequences = re.findall(regex, text) 
         
         for orig_seq in sequences:
-            orig_seq = orig_seq.rstrip().lstrip() # Remove extra whitespace from the start and end of the sequences
-            orig_sequences.append(orig_seq)
-            modified_sequences.append(sentence_corrupt(orig_seq, sentence_percentage))
+            if len(orig_seq.split()) < MAX_SEQ_LENGTH:
+                orig_seq = orig_seq.rstrip().lstrip() # Remove extra whitespace from the start and end of the sequences
+                orig_sequences.append([orig_seq])
+                modified_sequences.append(sentence_corrupt(orig_seq, sentence_percentage))
             
         idx += 1
         
-    df = pd.DataFrame({"Original": orig_sequences, "Corrupted": modified_sequences})
+    df = pd.DataFrame({"corrections": orig_sequences, "sentence": modified_sequences})
     
     # Write the dataframe to a tsv-file with the current time and amount of examples
     today = date.today()

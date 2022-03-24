@@ -2,14 +2,12 @@ import os
 import sys
 import inspect
 
-from numpy import choose
-
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir) 
 
 import random
-from settings import masking, deletion, insertion, seq_threshold, cum_word_distribution
+from settings import word_masking, word_deletion, word_insertion, seq_threshold, cum_word_distribution
 
 def choose_word(chance: float) -> str:
     for cum_fraction, word in cum_word_distribution.items():
@@ -26,11 +24,11 @@ def word_corrupt(word: str, seq_length: int) -> str:
         return word + " "
     
     # Perform corruptions
-    if percentage < masking: # mask the original word
+    if percentage < word_masking: # mask the original word
         return "<mask> "
-    elif percentage < deletion: # delete the word
+    elif percentage < word_deletion: # delete the word
         return ""
-    elif percentage < insertion: # insert a random token
+    elif percentage < word_insertion: # insert a random token
         chance = random.uniform(0, 1)
         return f"{word} {choose_word(chance)} "
     else:
