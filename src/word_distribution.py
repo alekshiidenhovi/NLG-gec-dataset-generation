@@ -4,6 +4,16 @@ import re
 
 
 def create_word_distribution(n_articles: int, n_words: int):
+    """Creates a dictionary of random word probabilities.
+    
+    Parameters
+    ----------
+    n_articles (int): number of articles
+    
+    n_words (int): amount of words in the created dictionary
+    
+    Returns
+    prob_distribution (dict): dictionary with probabilities as keys and their corresponding words as values"""
     wikipedia = load_dataset("wikipedia", "20200501.en")["train"]
 
     word_distribution = Counter()
@@ -30,6 +40,7 @@ def create_word_distribution(n_articles: int, n_words: int):
 
     return prob_distribution
 
-print(create_word_distribution(100000, 50))
+if __name__ == '__main__':
+    print(create_word_distribution(100000, 50))
 
 

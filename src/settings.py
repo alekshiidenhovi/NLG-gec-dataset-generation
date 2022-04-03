@@ -1,6 +1,10 @@
 # Main
-MAX_SEQ_LENGTH = 50
-include_articles = 1000 # How many articles are included to the dataset, one article contains ~20 word sequences
+MAX_SEQ_LENGTH = 40 # Maximum amount of words
+training_amount = 100000 # Amount of training samples
+validation_amount = 100 # Amount of validation samples
+
+# Pattern corrupt
+
 
 # Sentence corrupt
 sentence_percentage = 0.7 # How many sentences get corrupted

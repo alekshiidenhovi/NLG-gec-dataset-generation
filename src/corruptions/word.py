@@ -33,4 +33,21 @@ def word_corrupt(word: str, seq_length: int) -> str:
         return f"{word} {choose_word(chance)} "
     else:
         return word + " "
-    
+
+
+if __name__ == '__main__':
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))
+    print(word_corrupt("Jason", 10))

@@ -29,3 +29,13 @@ def sentence_corrupt(sentence: str, sentence_percentage: float) -> str:
         corrupted_sent = sentence
             
     return corrupted_sent.rstrip().lstrip()
+
+
+if __name__ == '__main__':
+    sentence = "A transformer is a deep learning model that adopts the mechanism of self-attention, differentially weighting the significance of each part of the input data."
+
+    print(sentence_corrupt(sentence, 1))
+    print(sentence_corrupt(sentence, 1))
+    print(sentence_corrupt(sentence, 1))
+    print(sentence_corrupt(sentence, 1))
+    print(sentence_corrupt(sentence, 1))

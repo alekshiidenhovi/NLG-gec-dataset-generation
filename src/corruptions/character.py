@@ -61,3 +61,16 @@ def character_corrupt(word: str) -> str:
         i += 1
     
     return corrupted_word
+
+
+if __name__ == "__main__":
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
+    print(character_corrupt("Extremelylongword."))
