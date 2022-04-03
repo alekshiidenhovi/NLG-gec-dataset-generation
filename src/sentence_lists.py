@@ -21,7 +21,7 @@ def create_sentence_lists(dataset, start_idx: int, amount: int):
         regex = r'([A-Z][^\t\n\.!?]*[\.!?])\s+'
         sequences = re.findall(regex, text) 
         sequences = list(filter(lambda seq: re.findall(r"\s[A-Za-z]{1,2}\.", seq) == [], sequences)) # Filter sentences that have been corrupted from words like Dr, Mr. etc
-        sequences = list(filter(lambda seq: len(list(seq)) >= 10, sequences)) # Filter sequences that are less than 10 characters long
+        sequences = list(filter(lambda seq: len(list(seq)) >= 10 and len(seq.split()) >= 3, sequences)) # Filter sequences that are less than 10 characters long or less than 3 words long
         
         for orig_seq in sequences:
             if len(orig_sequences) >= amount:

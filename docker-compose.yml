@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  gec:
+    image: gec
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./src:/usr/src/app/src
+    container_name: gec_app
+
+# volumes:
+#   gec_volume:

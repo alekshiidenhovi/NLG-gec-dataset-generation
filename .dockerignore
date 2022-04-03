@@ -1,0 +1,13 @@
+# Folders
+gec
+
+# Files
+docker-compose.yml
+Dockerfile
+README.md
+requirements_orig.txt
+
+# Hidden files
+.dockerignore
+.git
+.gitignore
