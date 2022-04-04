@@ -1,5 +1,6 @@
 from collections import Counter
 from datasets import load_dataset
+from utility import article_filter
 import re
 
 
@@ -14,16 +15,20 @@ def create_char_distribution(n_articles: int):
     prob_distribution (dict): dictionary with probabilities as keys and corresponding alphabets as values"""
     
     wikipedia = load_dataset("wikipedia", "20200501.en")["train"]
-    
     char_distribution = Counter()
     regex = r'([A-Za-z])'
 
     i = 0
     while i < n_articles:
         article = wikipedia[i]["text"]
-        characters = re.findall(regex, article)
-        for char in characters:
-            char_distribution[char.lower()] += 1
+        filtered_seqs = article_filter(article)
+        for seq in filtered_seqs:
+            characters = re.findall(regex, seq)
+            for char in characters:
+                char_distribution[char.lower()] += 1
+                
+        if i % 2500 == 0:
+            print(f"Article no. {i+1}")
         i += 1
 
     prob_distribution = {}

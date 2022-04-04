@@ -15,6 +15,16 @@ os.chdir(dname)
 
 # Creates a tsv file with original and corrupted word sequences
 def main():
+    """Creates a tsv file with original and corrupted word sequences.
+    Saves these files and used settings to the data file.
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    None"""
     wikipedia = load_dataset("wikipedia", "20200501.en")["train"]
     
     # Create training and validation sentence lists

@@ -9,8 +9,19 @@ sys.path.insert(0, parentdir)
 import random
 from settings import character_percentage, cum_char_distribution, punctuations, punct_percentage, char_insertion, char_deletion, char_replacement
 
-# Corrupt punctuation of the word
+
 def punctuation_corruption(character: str, corrupt_punct: float) -> str:
+    """Corrupts punctuation of the word
+    
+    Parameters
+    ----------
+    character (str): punctuation to be corrupted
+    corrupt_punct (float): percentage of punctuations corrupted
+    
+    Returns
+    -------
+    punctuation (str): original punctuation or corrupted punctuation"""
+    
     if random.uniform(0, 1) > corrupt_punct:
         return character
     else:
@@ -21,16 +32,37 @@ def punctuation_corruption(character: str, corrupt_punct: float) -> str:
         
         raise Exception("Error in the loop")
 
-# Returns character based on the character distribution
+
 def choose_character() -> str:
+    """Chooses a random character to be inserted into a word
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    char (str): random character from the alphabet"""
+    
     for cum_fraction, char in cum_char_distribution.items():
         if random.uniform(0, 1) <= cum_fraction:
             return char
     
     return Exception("Error in the loop")
 
-# Performs character level corruptions: insertion, deletion, replacement and swap
+
 def character_corrupt(word: str) -> str:
+    """Performs character level corruption on the word. Corruption methods include
+    insertion, deletion, replacement and swap.
+    
+    Parameters
+    ----------
+    word (str): word to be corrupted
+    
+    Returns
+    -------
+    corrupted_word (str): corrupted word"""
+    
     corrupted_word: str = ""
     
     i = 0 
@@ -48,7 +80,7 @@ def character_corrupt(word: str) -> str:
                 corruption = ""
             elif chance < char_replacement: # Replace the original character with a random character
                 corruption = choose_character()
-            elif i != len(word) - 1: # Swap characters if not the last word in sentence
+            elif i != len(word) - 1: # Swap characters if not the last character in word
                 corruption = word[i+1] + character
                 i += 1
             else:

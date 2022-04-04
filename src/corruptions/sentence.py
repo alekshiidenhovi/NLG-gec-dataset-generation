@@ -4,7 +4,7 @@ import inspect
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir) 
+sys.path.insert(0, parentdir)
 
 from corruptions.word import word_corrupt
 from corruptions.character import character_corrupt
@@ -12,17 +12,27 @@ from typing import List
 import random
 
 def sentence_corrupt(sentence: str, sentence_percentage: float) -> str:
+    """Perform sentence level corruption. First perform character level corruption and
+    then word level corruption.
+    
+    Parameters
+    ----------
+    sentence (str): sentence to be corrupted
+    sentence_percentage (float): percentage of sentences to be corrupted
+    
+    Returns
+    -------
+    corrupted_sent (str): corrupted sentence"""
+    
     corrupted_sent: str = ""
         
     # If random number is lower than the corrupt_percentage, corrupt the word
     if random.uniform(0, 1) <= sentence_percentage:
         words: List[str] = sentence.split()
-        for idx, orig_word in enumerate(words):
-            sent_length: int = len(words)
-            corrupted_word: str = character_corrupt(orig_word)
-            
-            if idx != sent_length - 1: # Corrupt all but the last word on word level
-                corrupted_word = word_corrupt(corrupted_word, sent_length)
+        idx = 0
+        while idx < len(words):
+            corrupted_word, idx = word_corrupt(words, idx)
+            corrupted_word = character_corrupt(corrupted_word)
                 
             corrupted_sent += corrupted_word
     else:

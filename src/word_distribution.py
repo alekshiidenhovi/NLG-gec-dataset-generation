@@ -1,5 +1,6 @@
 from collections import Counter
 from datasets import load_dataset
+from utility import article_filter
 import re
 
 
@@ -9,23 +10,27 @@ def create_word_distribution(n_articles: int, n_words: int):
     Parameters
     ----------
     n_articles (int): number of articles
-    
     n_words (int): amount of words in the created dictionary
     
     Returns
+    -------
     prob_distribution (dict): dictionary with probabilities as keys and their corresponding words as values"""
+    
     wikipedia = load_dataset("wikipedia", "20200501.en")["train"]
-
     word_distribution = Counter()
-    regex = r'[^A-Za-z]([A-Za-z]+)[^A-Za-z]'
+    regex = r'[^A-Za-z]([A-Za-z\-\']+)[^A-Za-z]'
 
     i = 0
     while i < n_articles:
         article = wikipedia[i]["text"]
-        article = article.split("\n\nReferences")[0] # Remove reference section
-        words = re.findall(regex, article)
-        for word in words:
-            word_distribution[word.lower()] += 1
+        sequences = article_filter(article)
+        for seq in sequences:
+            words = re.findall(regex, seq)
+            for word in words:
+                word_distribution[word.lower()] += 1
+                
+        if i % 2500 == 0:
+            print(f"Article no. {i+1}")
         i += 1
 
     prob_distribution = {}
@@ -41,6 +46,6 @@ def create_word_distribution(n_articles: int, n_words: int):
     return prob_distribution
 
 if __name__ == '__main__':
-    print(create_word_distribution(100000, 50))
+    print(create_word_distribution(100000, 100))
 
 

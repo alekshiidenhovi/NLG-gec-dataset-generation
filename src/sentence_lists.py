@@ -1,27 +1,32 @@
-import re
-
-from datasets import load_dataset
-from settings import MAX_SEQ_LENGTH, sentence_percentage
+from typing import List
 from corruptions.sentence import sentence_corrupt
+from settings import MAX_ARTICLES, MAX_SEQ_LENGTH, sentence_percentage
+from utility import article_filter
+
 
 def create_sentence_lists(dataset, start_idx: int, amount: int):
-    orig_sequences = []
-    modified_sequences = []
-    idx = start_idx
-    keep_looping = True
+    """Create filtered and corrupted sentence lists.
     
-    while keep_looping:
-        article = dataset[idx] # Dictionary with 'title' and 'text' keys
-        
-        text: str = article["text"] # Choose the text part of the article
-        text = text.split("\n\nReferences")[0] # Remove reference section
-        
-        # Find all the individual chapters
-        # regex = r'\s?([^\n]+)' # First version
-        regex = r'([A-Z][^\t\n\.!?]*[\.!?])\s+'
-        sequences = re.findall(regex, text) 
-        sequences = list(filter(lambda seq: re.findall(r"\s[A-Za-z]{1,2}\.", seq) == [], sequences)) # Filter sentences that have been corrupted from words like Dr, Mr. etc
-        sequences = list(filter(lambda seq: len(list(seq)) >= 10 and len(seq.split()) >= 3, sequences)) # Filter sequences that are less than 10 characters long or less than 3 words long
+    Parameters
+    ----------
+    dataset (Dataset): Wikipedia dataset
+    start_idx (int): Starting index for the first article
+    amount (int): Amount of articles included to the list
+    
+    Returns
+    -------
+    orig_sequences (List[str]): List of filtered sentences
+    modified_sequences (List[str]): List of corrupted sentences
+    idx (int): Ending index"""
+    
+    orig_sequences: List[str] = []
+    modified_sequences: List[str] = []
+    idx: int = start_idx
+    keep_looping: bool = True
+    
+    while keep_looping and idx < MAX_ARTICLES:
+        article: str = dataset[idx]["text"] # Dictionary with 'title' and 'text' keys
+        sequences: List[str] = article_filter(article) # Get filtered sentences from the article
         
         for orig_seq in sequences:
             if len(orig_sequences) >= amount:
