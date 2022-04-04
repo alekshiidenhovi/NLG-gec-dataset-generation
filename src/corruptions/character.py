@@ -70,12 +70,12 @@ def character_corrupt(word: str) -> str:
         character = word[i]
         if i == len(word) - 1 and character in punctuations.values(): # Perform punctuation corruption
             corrupted_word += punctuation_corruption(character, punct_percentage)
-        elif random.uniform(0, 1) < character_percentage: # Perform character level corruption
+        elif random.uniform(0, 1) <= character_percentage: # Perform character level corruption
             corruption = ""
             chance = random.uniform(0, 1)
             
             if chance < char_insertion: # Insert a random character
-                corruption = character + choose_character()
+                corruption = choose_character() + character
             elif chance < char_deletion: # Delete the original character
                 corruption = ""
             elif chance < char_replacement: # Replace the original character with a random character

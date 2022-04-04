@@ -36,7 +36,9 @@ def create_sentence_lists(dataset, start_idx: int, amount: int):
                 orig_seq = orig_seq.rstrip().lstrip() # Remove extra whitespace from the start and end of the sequences
                 orig_sequences.append(orig_seq)
                 modified_sequences.append(sentence_corrupt(orig_seq, sentence_percentage))
-            
+        
+        if idx % 1000 == 0:
+            print(f"Filtered sentences: {len(orig_sequences)}")      
         idx += 1
         
     return orig_sequences, modified_sequences, idx

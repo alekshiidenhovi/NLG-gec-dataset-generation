@@ -9,6 +9,7 @@ sys.path.insert(0, parentdir)
 from corruptions.word import word_corrupt
 from corruptions.character import character_corrupt
 from typing import List
+from settings import word_percentage
 import random
 
 def sentence_corrupt(sentence: str, sentence_percentage: float) -> str:
@@ -31,9 +32,12 @@ def sentence_corrupt(sentence: str, sentence_percentage: float) -> str:
         words: List[str] = sentence.split()
         idx = 0
         while idx < len(words):
-            corrupted_word, idx = word_corrupt(words, idx)
+            corrupted_word = words[idx] + " "
+            if random.uniform(0, 1) <= word_percentage:
+                corrupted_word, idx = word_corrupt(words, idx)
+            else:
+                idx += 1
             corrupted_word = character_corrupt(corrupted_word)
-                
             corrupted_sent += corrupted_word
     else:
         corrupted_sent = sentence

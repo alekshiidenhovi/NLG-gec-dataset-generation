@@ -2,13 +2,16 @@ import os
 import sys
 import inspect
 
+from corruptions.part_of_speech import corrupt_POS
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir) 
 
 import random
 from typing import List
-from settings import word_masking, word_deletion, word_insertion, word_swap, seq_threshold, cum_word_distribution
+from settings import word_masking, word_deletion, word_insertion, word_swap, cum_word_distribution
+from part_of_speech import corrupt_POS
 
 
 def choose_word(chance: float) -> str:
@@ -54,11 +57,11 @@ def word_corrupt(words: List[str], idx: int) -> str:
     elif percentage < word_insertion: # insert a random token
         chance = random.uniform(0, 1)
         corrupted_word = f"{choose_word(chance)} {first_word} "
-    elif percentage < word_swap and idx + 1 < len(words): 
+    elif percentage < word_swap and idx + 1 < len(words): # swap words
         corrupted_word = f"{words[idx+1]} {first_word} "
         idx += 1
-    else:
-        corrupted_word = f"{first_word} "
+    else: # perform corruption based on part-of-speech tags
+        corrupted_word = f"{corrupt_POS(first_word)} "
         
     return corrupted_word, idx + 1
 
