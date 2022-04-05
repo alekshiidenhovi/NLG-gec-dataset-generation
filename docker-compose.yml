@@ -10,6 +10,3 @@ services:
     volumes:
       - ./src:/usr/src/app/src
     container_name: gec_app
-
-# volumes:
-#   gec_volume:

@@ -7,7 +7,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir) 
 
 import random
-from settings import character_percentage, cum_char_distribution, punctuations, punct_percentage, char_insertion, char_deletion, char_replacement
+from settings import character_percentage, cumu_char_distribution, punctuations, punct_percentage, char_insertion, char_deletion, char_replacement
 
 
 def punctuation_corruption(character: str, corrupt_punct: float) -> str:
@@ -44,7 +44,7 @@ def choose_character() -> str:
     -------
     char (str): random character from the alphabet"""
     
-    for cum_fraction, char in cum_char_distribution.items():
+    for cum_fraction, char in cumu_char_distribution.items():
         if random.uniform(0, 1) <= cum_fraction:
             return char
     

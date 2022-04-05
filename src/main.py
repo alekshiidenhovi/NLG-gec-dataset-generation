@@ -1,11 +1,11 @@
 import pandas as pd
+import random
 import shutil
 import os
 from datasets import load_dataset
 from datetime import datetime, date
 
-from corruptions.sentence import sentence_corrupt
-from settings import training_amount, validation_amount, sentence_percentage, MAX_SEQ_LENGTH
+from settings import training_amount, validation_amount, MAX_ARTICLES
 from sentence_lists import create_sentence_lists
 
 # Change the current working directory to src
@@ -27,9 +27,13 @@ def main():
     None"""
     wikipedia = load_dataset("wikipedia", "20200501.en")["train"]
     
+    # Scramble indices
+    random_indices = list(range(MAX_ARTICLES))
+    random.shuffle(random_indices)
+    
     # Create training and validation sentence lists
-    train_orig_sequences, train_modified_sequences, end_idx = create_sentence_lists(wikipedia, 0, training_amount)
-    val_orig_sequences, val_modified_sequences, _ = create_sentence_lists(wikipedia, end_idx, validation_amount)
+    train_orig_sequences, train_modified_sequences, end_idx = create_sentence_lists(wikipedia, 0, training_amount, random_indices)
+    val_orig_sequences, val_modified_sequences, _ = create_sentence_lists(wikipedia, end_idx, validation_amount, random_indices)
     
     train_df = pd.DataFrame({"corrupted": train_modified_sequences, "original": train_orig_sequences})
     validation_df = pd.DataFrame({"corrupted": val_modified_sequences, "original": val_orig_sequences})
