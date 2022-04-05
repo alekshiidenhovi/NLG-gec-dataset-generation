@@ -148,6 +148,10 @@ def corrupt_POS(word: str) -> str:
 
 
 if __name__ == '__main__':
+    # NOTE! Problem with adjectives where last letter of the original get duplicated when
+    # transformed to comparative or superlative form. E.g bigger --> bigg
+    # This isn't a big problem since the words are corrupted anyways, this can be viewed 
+    # as extra character level corruption
     print("Adjectives")
     print(f"big: {corrupt_POS('big')}")
     print(f"bigger: {corrupt_POS('bigger')}")

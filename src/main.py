@@ -48,13 +48,17 @@ def main():
     time = f"{current_date}_{current_time}"
     
     train_path = f"./data/training/wikipedia_{time}_{training_amount}.tsv"
+    os.makedirs(os.path.dirname(train_path), exist_ok=True)
     train_df.to_csv(train_path, sep="\t", index=False, header=False)
     
     val_path = f"./data/validation/wikipedia_{time}_{validation_amount}.tsv"
+    os.makedirs(os.path.dirname(val_path), exist_ok=True)
     validation_df.to_csv(val_path, sep="\t", index=False, header=False)
     
     # Copy current settings to the settings file
-    shutil.copyfile("./settings.py", f"./data/settings/settings_{time}.py")
+    settings_path = f"./data/settings/settings_{time}.py"
+    os.makedirs(os.path.dirname(settings_path), exist_ok=True)
+    shutil.copyfile("./settings.py", settings_path)
     
 
 if __name__ == '__main__':

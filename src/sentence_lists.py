@@ -1,4 +1,3 @@
-import random
 from typing import List
 from corruptions.sentence import sentence_corrupt
 from settings import MAX_ARTICLES, MAX_SEQ_LENGTH, sentence_percentage

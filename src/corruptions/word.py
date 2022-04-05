@@ -2,8 +2,6 @@ import os
 import sys
 import inspect
 
-from corruptions.part_of_speech import corrupt_POS
-
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir) 

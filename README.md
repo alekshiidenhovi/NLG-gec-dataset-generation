@@ -49,3 +49,9 @@ Proportions of character level corruptions can be adjusted from src/settings.py 
 
 ## How to Run
 You only need to have Docker and docker-compose installed. You can install them from here: https://docs.docker.com/get-docker/
+
+Then perform the following steps:
+1. In the root of the project run the following command in terminal: ```docker-compose up```
+2. In another terminal run the following command: ```docker exec -it gec_app bash```
+
+You're good to go! You're now inside the container and can use BASH to navigate. Navigate to "src" directory and run the command ```python main.py```. This command will run the main script which will create the training and validation sets and upload them to "data" directory with the settings used for creating the datasets.
