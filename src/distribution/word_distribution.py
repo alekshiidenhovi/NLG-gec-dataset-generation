@@ -1,11 +1,19 @@
+import os
+import sys
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
+
+import re
 from collections import Counter
 from datasets import load_dataset
 from utility import article_filter
-import re
 
 
 def create_word_distribution(n_articles: int, n_words: int):
-    """Creates a dictionary of random word probabilities.
+    """Creates a dictionary of random short word probabilities.
     
     Parameters
     ----------
@@ -27,7 +35,8 @@ def create_word_distribution(n_articles: int, n_words: int):
         for seq in sequences:
             words = re.findall(regex, seq)
             for word in words:
-                word_distribution[word.lower()] += 1
+                if len(word) <= 5: # Filter words longer than 5 characters
+                    word_distribution[word.lower()] += 1
                 
         if i % 2500 == 0:
             print(f"Article no. {i+1}")
@@ -46,6 +55,6 @@ def create_word_distribution(n_articles: int, n_words: int):
     return prob_distribution
 
 if __name__ == '__main__':
-    print(create_word_distribution(100000, 100))
+    print(create_word_distribution(100000, 70))
 
 

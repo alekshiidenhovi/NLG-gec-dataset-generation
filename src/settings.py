@@ -9,17 +9,18 @@ validation_amount = 100 # Amount of validation samples
 articles = ["a", "an", "the"]
 article_percentage = 0.7
 
+
 # Sentence corrupt
 sentence_percentage = 0.7 # How many sentences get corrupted
 
 
 # Word corrupt
-word_percentage = 0.15 # Fraction of words corrupted
+word_percentage = 0.12 # Fraction of words corrupted
 word_masking = 0.1 # Fraction of corruptions masked
 word_deletion = 0.3 # ... deleted
 word_insertion = 0.5 # ... inserted
 word_swap = 0.65 # ... swapped
-cum_word_distribution = {0.159024: 'the', 0.24421: 'and', 0.322756: 'of', 0.386656: 'in', 0.438544: 'to', 0.488117: 'a', 0.521234: 'was', 0.548375: 'is', 0.569344: 'as', 0.589777: 'for', 0.608854: 's', 0.627591: 'on', 0.646313: 'with', 0.663082: 'by', 0.676456: 'that', 0.689313: 'at', 0.701685: 'from', 0.713382: 'he', 0.724409: 'his', 0.734962: 'which', 0.743755: 'an', 0.75156: 'were', 0.759008: 'but', 0.766377: 'are', 0.773602: 'it', 0.780103: 'who', 0.78654: 'or', 0.792711: 'also', 0.798599: 'has', 0.804446: 'be', 0.810272: 'first', 0.815935: 'had', 0.820966: 'th', 0.825854: 'new', 0.83066: 'their', 0.835294: 'this', 0.839908: 'one', 0.844273: 'her', 0.848586: 'its', 0.852842: 'not', 0.856792: 'after', 0.860697: 'two', 0.864601: 'have', 0.868279: 'she', 0.871868: 'been', 0.87539: 'where', 0.878903: 'they', 0.882353: 'when', 0.88553: '-', 0.888582: 'into', 0.891591: 'may', 0.894593: 'other', 0.897577: 'including', 0.900486: 'time', 0.903376: 'years', 0.90615: 'all', 0.908753: 'such', 0.911316: 'school', 0.913859: 'more', 0.916366: 'during', 0.918848: 'then', 0.921316: 'season', 0.923755: 'would', 0.926193: 'only', 0.928624: 'born', 0.931036: 'while', 0.933369: 'over', 0.935685: 'up', 0.93795: 'between', 0.940178: 'city', 0.942382: 'there', 0.944563: 'made', 0.946708: 'most', 0.94885: 'used', 0.950986: 'world', 0.953108: 'him', 0.955222: 'year', 0.957299: 'united', 0.959368: 'three', 0.961412: 'later', 0.963438: 'about', 0.96544: 'out', 0.96744: 'film', 0.969422: 'american', 0.971404: 'state', 0.973383: 'can', 0.975353: 'national', 0.977318: 'being', 0.979245: 'march', 0.981171: 'university', 0.983089: 'became', 0.985007: 'until', 0.986914: 'some', 0.988805: 'second', 0.99069: 'before', 0.992574: 'team', 0.994437: 'part', 0.996295: 'under', 0.998151: 'known', 1: 'through'}
+cum_word_distribution = {0.169499: 'the', 0.260296: 'and', 0.344015: 'of', 0.412124: 'in', 0.46743: 'to', 0.520268: 'a', 0.555566: 'was', 0.584494: 'is', 0.606845: 'as', 0.628624: 'for', 0.648958: 's', 0.66893: 'on', 0.688885: 'with', 0.706758: 'by', 0.721013: 'that', 0.734717: 'at', 0.747904: 'from', 0.760372: 'he', 0.772125: 'his', 0.783373: 'which', 0.792745: 'an', 0.801064: 'were', 0.809003: 'but', 0.816858: 'are', 0.824559: 'it', 0.831488: 'who', 0.838349: 'or', 0.844926: 'also', 0.851202: 'has', 0.857435: 'be', 0.863645: 'first', 0.869681: 'had', 0.875043: 'th', 0.880253: 'new', 0.885376: 'their', 0.890315: 'this', 0.895233: 'one', 0.899885: 'her', 0.904482: 'its', 0.909019: 'not', 0.913229: 'after', 0.917391: 'two', 0.921552: 'have', 0.925472: 'she', 0.929297: 'been', 0.933051: 'where', 0.936795: 'they', 0.940473: 'when', 0.943859: '-', 0.947113: 'into', 0.95032: 'may', 0.95352: 'other', 0.956621: 'time', 0.959701: 'years', 0.962658: 'all', 0.965432: 'such', 0.968143: 'more', 0.970788: 'then', 0.973388: 'would', 0.975987: 'only', 0.978578: 'born', 0.981149: 'while', 0.983636: 'over', 0.986105: 'up', 0.98848: 'city', 0.990829: 'there', 0.993154: 'made', 0.99544: 'most', 0.997723: 'used', 1: 'world'}
 
 
 # Character corrupt
@@ -36,5 +37,5 @@ punctuations = { # The distribution of punctuation corruptions
 }
 char_insertion = 0.25
 char_deletion = 0.5
-char_replacement = 0.7
-punct_percentage = 0.5 # How often punctuation gets corrupted
+char_replacement = 0.75
+punct_percentage = 0.4 # How often punctuation gets corrupted

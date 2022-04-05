@@ -11,7 +11,7 @@ sys.path.insert(0, parentdir)
 import random
 from typing import List
 from settings import word_masking, word_deletion, word_insertion, word_swap, cum_word_distribution
-from part_of_speech import corrupt_POS
+from corruptions.part_of_speech import corrupt_POS
 
 
 def choose_word(chance: float) -> str:

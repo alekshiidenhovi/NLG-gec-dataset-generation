@@ -8,7 +8,7 @@ except AttributeError:
     pass
 else:
     ssl._create_default_https_context = _create_unverified_https_context
-    
+
 nltk.download("omw-1.4", quiet=True)
 from pattern.en import tag, comparative, superlative, conjugate, singularize, pluralize
 

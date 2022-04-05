@@ -24,6 +24,21 @@ def contains_verb(seq: str):
     return False
 
 
+def remove_parantheses(sentence: str):
+    """Removes obsolete parantheses from a sentence.
+    
+    Parameters
+    ----------
+    sentence (str): Sentence to be filtered
+    
+    Returns
+    -------
+    filtered_sentence (str): Sentence with extra parantheses removed"""
+    
+    split_sentence = sentence.split(" () ") # Split sentence on the extra parantheses.
+    return " ".join(split_sentence)
+
+
 def article_filter(text: str):
     """Performs regex extraction and filtering of the sentences.
     
@@ -33,7 +48,7 @@ def article_filter(text: str):
 
     Returns
     -------
-    filtered_seqs (List[str]): List of filtered sentences"""
+    sequences (List[str]): List of filtered sentences"""
     
     text = text.split("\n\nReferences")[0] # Remove reference section
         
@@ -43,5 +58,6 @@ def article_filter(text: str):
     sequences = list(filter(lambda seq: re.findall(r"\s[A-Za-z]{1,2}\.", seq) == [], sequences)) # Filter sentences that have been corrupted from words like Dr, Mr. etc
     sequences = list(filter(lambda seq: len(list(seq)) >= 10 and len(seq.split()) >= 3, sequences)) # Filter sequences that are less than 10 characters long or less than 3 words long
     sequences = list(filter(lambda seq: contains_verb(seq), sequences)) # Filter sequences that don't contain any verbs
+    sequences = list(map(lambda seq: remove_parantheses(seq), sequences))
     
     return sequences
