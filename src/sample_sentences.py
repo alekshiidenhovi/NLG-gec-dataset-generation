@@ -43,4 +43,4 @@ def create_sample_sentences(n_sentences: int):
 
 
 if __name__ == '__main__':
-    create_sample_sentences(10000)
+    create_sample_sentences(1000)
