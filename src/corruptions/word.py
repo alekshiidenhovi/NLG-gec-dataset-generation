@@ -8,7 +8,8 @@ sys.path.insert(0, parentdir)
 
 import random
 from typing import List
-from settings import word_masking, word_deletion, word_insertion, cumu_word_distribution
+from settings import word_masking, word_deletion, word_insertion, word_swap, cumu_word_distribution
+from corruptions.part_of_speech import corrupt_POS
 
 
 def choose_word(chance: float) -> str:
@@ -54,11 +55,11 @@ def word_corrupt(words: List[str], idx: int) -> str:
     elif percentage < word_insertion: # insert a random token
         chance = random.uniform(0, 1)
         corrupted_word = f"{choose_word(chance)} {first_word} "
-    elif idx + 1 < len(words): # swap words
+    elif percentage < word_swap and idx + 1 < len(words): # swap words
         corrupted_word = f"{words[idx+1]} {first_word} "
         idx += 1
-    else: # return the original word
-        corrupted_word = f"{first_word} "
+    else: # POS-tag corruption
+        corrupted_word = f"{corrupt_POS(first_word)} "
         
     return corrupted_word, idx + 1
 
